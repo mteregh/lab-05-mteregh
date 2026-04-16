@@ -1,2 +1,20 @@
-<h1>Vets#index</h1>
-<p>Find me in app/views/vets/index.html.erb</p>
+<h1>Vets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Full name</th>
+      <th>Email</th>
+      <th>Specialization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vets.each do |vet| %>
+      <tr>
+        <td><%= link_to vet.full_name, vet_path(vet) %></td>
+        <td><%= vet.email %></td>
+        <td><%= vet.specialization %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
