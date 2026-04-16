@@ -1,28 +1,41 @@
-<h1>Appointment Details</h1>
+<h1 class="mb-4">Appointment Details</h1>
 
-<p><strong>Date:</strong> <%= @appointment.date %></p>
-<p><strong>Reason:</strong> <%= @appointment.reason %></p>
-<p><strong>Status:</strong> <%= @appointment.status %></p>
-<p>
-  <strong>Pet:</strong>
-  <%= link_to @appointment.pet.name, pet_path(@appointment.pet) %>
-</p>
-<p>
-  <strong>Vet:</strong>
-  <%= link_to @appointment.vet.full_name, vet_path(@appointment.vet) %>
-</p>
+<div class="card mb-4">
+  <div class="card-body">
+    <p><strong>Date:</strong> <%= @appointment.date.strftime("%B %d, %Y %I:%M %p") %></p>
+    <p><strong>Reason:</strong> <%= @appointment.reason %></p>
+    <p><strong>Status:</strong> <%= @appointment.status.humanize %></p>
+    <p><strong>Pet:</strong> <%= link_to @appointment.pet.name, pet_path(@appointment.pet) %></p>
+    <p><strong>Vet:</strong> <%= link_to @appointment.vet.full_name, vet_path(@appointment.vet) %></p>
+  </div>
+</div>
 
 <h2>Treatments</h2>
 
-<ul>
-  <% @appointment.treatments.each do |treatment| %>
-    <li>
-      <strong>Name:</strong> <%= treatment.name %><br>
-      <strong>Medication:</strong> <%= treatment.medication %><br>
-      <strong>Dosage:</strong> <%= treatment.dosage %><br>
-      <strong>Administered at:</strong> <%= treatment.administered_at %><br>
-      <strong>Notes:</strong> <%= treatment.notes %>
-    </li>
-    <br>
-  <% end %>
-</ul>
+<% if @appointment.treatments.any? %>
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Medication</th>
+        <th>Dosage</th>
+        <th>Administered at</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @appointment.treatments.each do |treatment| %>
+        <tr>
+          <td><%= treatment.name %></td>
+          <td><%= treatment.medication %></td>
+          <td><%= treatment.dosage %></td>
+          <td><%= treatment.administered_at.strftime("%B %d, %Y %I:%M %p") %></td>
+          <td><%= treatment.notes %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No treatments recorded for this appointment.</p>
+  
+<% end %>
