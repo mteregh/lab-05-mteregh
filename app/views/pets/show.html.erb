@@ -1,2 +1,23 @@
-<h1>Pets#show</h1>
-<p>Find me in app/views/pets/show.html.erb</p>
+<h1><%= @pet.name %></h1>
+
+<p><strong>Name:</strong> <%= @pet.name %></p>
+<p><strong>Species:</strong> <%= @pet.species %></p>
+<p><strong>Breed:</strong> <%= @pet.breed %></p>
+<p><strong>Date of birth:</strong> <%= @pet.date_of_birth %></p>
+<p><strong>Weight:</strong> <%= @pet.weight %></p>
+<p>
+  <strong>Owner:</strong>
+  <%= link_to @pet.owner.full_name, owner_path(@pet.owner) %>
+</p>
+
+<h2>Appointments</h2>
+
+<ul>
+  <% @pet.appointments.each do |appointment| %>
+    <li>
+      <%= link_to appointment.date, appointment_path(appointment) %>
+      - <%= appointment.reason %>
+    </li>
+  <% end %>
+  
+</ul>
