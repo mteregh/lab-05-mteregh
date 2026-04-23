@@ -8,11 +8,11 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Owner.destroy_all
-Vet.destroy_all
-Pet.destroy_all
-Appointment.destroy_all
 Treatment.destroy_all
+Appointment.destroy_all
+Pet.destroy_all
+Vet.destroy_all
+Owner.destroy_all
 
 owners = [
   Owner.create!(
@@ -41,35 +41,35 @@ owners = [
 pets = [
   owners[0].pets.create!(
     name: "Luna",
-    species: "Dog",
+    species: "dog",
     breed: "Labrador",
     date_of_birth: Date.new(2020, 5, 10),
     weight: 24.5
   ),
   owners[0].pets.create!(
     name: "Milo",
-    species: "Cat",
+    species: "cat",
     breed: "Siamese",
     date_of_birth: Date.new(2021, 8, 15),
     weight: 4.2
   ),
   owners[1].pets.create!(
     name: "Bella",
-    species: "Rabbit",
+    species: "rabbit",
     breed: "Mini Lop",
     date_of_birth: Date.new(2022, 3, 20),
     weight: 2.1
   ),
   owners[1].pets.create!(
     name: "Rocky",
-    species: "Dog",
+    species: "dog",
     breed: "Beagle",
     date_of_birth: Date.new(2019, 11, 2),
     weight: 12.8
   ),
   owners[2].pets.create!(
     name: "Nala",
-    species: "Cat",
+    species: "cat",
     breed: "Persian",
     date_of_birth: Date.new(2018, 7, 1),
     weight: 5.0
@@ -99,35 +99,35 @@ appointments = [
     vet: vets[0],
     date: DateTime.new(2026, 4, 10, 10, 0, 0),
     reason: "Annual checkup",
-    status: 0
+    status: :scheduled
   ),
   Appointment.create!(
     pet: pets[1],
     vet: vets[1],
     date: DateTime.new(2026, 4, 11, 11, 30, 0),
     reason: "Skin irritation",
-    status: 1
+    status: :in_progress
   ),
   Appointment.create!(
     pet: pets[2],
     vet: vets[0],
     date: DateTime.new(2026, 4, 12, 9, 15, 0),
     reason: "Dental revision",
-    status: 2
+    status: :completed
   ),
   Appointment.create!(
     pet: pets[3],
     vet: vets[1],
     date: DateTime.new(2026, 4, 13, 14, 0, 0),
     reason: "Leg injury",
-    status: 2
+    status: :completed
   ),
   Appointment.create!(
     pet: pets[4],
     vet: vets[0],
     date: DateTime.new(2026, 4, 14, 16, 45, 0),
     reason: "Vaccination follow-up",
-    status: 3
+    status: :cancelled
   )
 ]
 

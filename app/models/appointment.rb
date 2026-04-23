@@ -9,5 +9,6 @@ class Appointment < ApplicationRecord
     completed: 2,
     cancelled: 3
   }
-  
+
+  validates :date, :reason, :pet, :vet, :status, presence: true
 end
