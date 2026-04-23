@@ -10,6 +10,8 @@ class Pet < ApplicationRecord
 
   before_save :capitalize_name
 
+  scope :by_species, ->(species) { where(species: species) }
+  
   private
 
   def date_of_birth_cannot_be_in_future

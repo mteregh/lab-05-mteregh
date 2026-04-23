@@ -9,6 +9,8 @@ class Vet < ApplicationRecord
 
   before_validation :normalize_email
 
+  scope :by_specialization, ->(specialization) { where(specialization: specialization) }
+
   def full_name
     "#{first_name} #{last_name}"
   end

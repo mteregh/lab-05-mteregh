@@ -1,22 +1,21 @@
-<h1 class="mb-4"><%= @pet.name %></h1>
+<h2>Upcoming Appointments</h2>
 
-<div class="card mb-4">
-  <div class="card-body">
-    <p><strong>Species:</strong> <%= @pet.species %></p>
-    <p><strong>Breed:</strong> <%= @pet.breed %></p>
-    <p><strong>Date of birth:</strong> <%= @pet.date_of_birth.strftime("%B %d, %Y") %></p>
-    <p><strong>Weight:</strong> <%= @pet.weight %></p>
-    <p><strong>Owner:</strong> <%= link_to @pet.owner.full_name, owner_path(@pet.owner) %></p>
-  </div>
-</div>
-
-<h2>Appointments</h2>
 <ul class="list-group">
-  <% @pet.appointments.each do |appointment| %>
+  <% @pet.appointments.upcoming.each do |appointment| %>
     <li class="list-group-item">
       <%= link_to appointment.date.strftime("%B %d, %Y %I:%M %p"), appointment_path(appointment) %>
       - <%= appointment.reason %>
     </li>
   <% end %>
-  
+</ul>
+
+<h2 class="mt-4">Past Appointments</h2>
+
+<ul class="list-group">
+  <% @pet.appointments.past.each do |appointment| %>
+    <li class="list-group-item">
+      <%= link_to appointment.date.strftime("%B %d, %Y %I:%M %p"), appointment_path(appointment) %>
+      - <%= appointment.reason %>
+    </li>
+  <% end %>
 </ul>

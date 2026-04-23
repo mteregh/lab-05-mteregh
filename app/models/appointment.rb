@@ -11,4 +11,8 @@ class Appointment < ApplicationRecord
   }
 
   validates :date, :reason, :pet, :vet, :status, presence: true
+
+  scope :upcoming, -> { where("date > ?", Time.current).order(date: :asc) }
+  scope :past, -> { where("date < ?", Time.current).order(date: :desc) }
+  
 end
